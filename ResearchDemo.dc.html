@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#FAF8F0;}
+a{color:#004CE5;text-decoration:none;}
+a:hover{color:#004CE5;text-decoration:underline;}
+</style>
+</helmet>
+<div data-screen-label="LLM Traffic Management Research" style="min-height:100vh;background:#FAF8F0;color:#061541;font-family:'Inter',sans-serif;">
+  <div style="padding:0 clamp(24px,4vw,64px) 48px;box-sizing:border-box;">
+
+    <dc-import name="SiteHeader" active="projects" hint-size="100%,80px"></dc-import>
+
+    <section style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,58%);gap:0;align-items:start;padding:12px 0 0;border-bottom:1px solid #A8B3CB;">
+      <div style="display:flex;flex-direction:column;gap:clamp(8px,0.9vw,14px);padding:clamp(14px,1.4vw,22px) 0 clamp(10px,1vw,16px);position:relative;z-index:1;">
+        <nav aria-label="Breadcrumb" style="display:flex;flex-wrap:wrap;align-items:center;gap:0 8px;font-family:'Inter',sans-serif;font-weight:700;font-size:clamp(10px,0.8vw,13px);letter-spacing:0.08em;text-transform:uppercase;color:#061541;"><a href="Home.dc.html" style="color:#061541;text-decoration:none;" style-hover="text-decoration:underline;">Home</a><span style="color:#A8B3CB;">/</span><a href="Projects.dc.html" style="color:#061541;text-decoration:none;" style-hover="text-decoration:underline;">Projects</a><span style="color:#A8B3CB;">/</span><a href="ProjectDetail.dc.html?project=transportation" style="color:#061541;text-decoration:none;" style-hover="text-decoration:underline;">Transportation</a><span style="color:#A8B3CB;">/</span><span>Research</span></nav>
+        <h1 style="margin:0;font-family:'Pixelify Sans',monospace;font-weight:700;font-size:clamp(34px,3.6vw,60px);line-height:1;letter-spacing:-0.01em;">Can LLM predict workzone overrun?</h1>
+      </div>
+      <div role="img" aria-label="Pixel illustration of Pittsburgh bridges and traffic" style="width:100%;height:clamp(100px,8.5vw,140px);background-image:url(uploads/project-transportation.png);background-size:cover;background-position:center;image-rendering:pixelated;-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,0.2) 25%,#000 55%);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,0.2) 25%,#000 55%);"></div>
+    </section>
+
+    <main style="width:100%;max-width:960px;margin:0 auto;padding-top:32px;display:flex;flex-direction:column;gap:40px;">
+
+      <section style="display:flex;flex-direction:column;gap:16px;">
+        <p style="margin:0;font-size:19px;line-height:1.5;font-weight:600;color:#061541;text-wrap:pretty;">We tested it on 2.5 years of North Carolina data. It couldn't beat a nearest neighbor. But a calibrated gate can still say when to raise an alert.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px 24px;">
+          <span aria-disabled="true" style="font-size:15px;font-weight:600;color:#A8B3CB;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;">GitHub ↗ (coming soon)</span>
+          <span style="font-size:15px;font-weight:600;color:#A8B3CB;">Paper: arXiv link TODO</span>
+          <span style="font-size:15px;font-weight:600;color:#A8B3CB;">Data: Zenodo DOI TODO</span>
+        </div>
+        <p style="margin:0;font-size:17px;line-height:1.7;color:#34466E;text-wrap:pretty;">Work-zone feeds (WZDx) post an end date for every lane closure, but the posted date is often a permit window rather than the day the work ends. This repository builds a benchmark from 2.5 years of North Carolina WZDx/TIMS data (6.74M feed entities, 11,108 slip-labelled records) and asks two questions: can a language model read a work-zone description and predict slip better than a simple nearest-neighbor over historical records, and can a slip alert be issued with a guaranteed false-alarm rate?</p>
+        <p style="margin:0;font-size:17px;line-height:1.7;color:#34466E;text-wrap:pretty;">The answers, on this feed, are <em>no</em> and <em>yes</em>. Two LLMs (Claude Haiku 4.5, Claude Sonnet 4.6), even when handed the nearest historical records, do not outperform a TF-IDF nearest neighbor on 217 paired hard-stratum items (Sonnet: p = 0.56; Haiku: significantly worse). A split-conformal gate calibrated on historical non-slipping records bounds the false-alarm rate by α; on 1,892 records the bound holds at three slip thresholds, recovering about 30% of true slips at α = 0.1 with precision nearly double the base rate. The gate does not depend on the LLM, and cannot: LLM self-reported confidence carries no information.</p>
+        <p style="margin:0;font-size:17px;line-height:1.7;color:#34466E;text-wrap:pretty;">Along the way we found that labels harvested directly from a polled feed are not usable without cleaning. Batch-process timestamps masquerade as completion times, posted dates fall outside the observation window, records linger after work ends, and projects are re-issued under new IDs. Detection rules for each are included and reproducible.</p>
+        <p style="margin:0;font-size:17px;line-height:1.7;color:#34466E;text-wrap:pretty;">Total LLM cost for every experiment reported: about US$1.5.</p>
+        <figure style="margin:8px 0 0;display:flex;flex-direction:column;gap:9px;">
+          <img src="uploads/01_pipeline.png" alt="Pipeline overview: from a raw DOT feed to a guaranteed alert" style="width:100%;height:auto;display:block;border:2px solid #061541;background:#FFFFFF;">
+          <figcaption style="font-size:13.5px;line-height:1.5;color:#6B7A9C;">Pipeline overview. Every stage is reproducible from the released scripts.</figcaption>
+        </figure>
+      </section>
+
+      <section style="display:flex;flex-direction:column;gap:16px;">
+        <h2 style="margin:0;font-family:'Inter',sans-serif;font-weight:700;font-size:clamp(22px,1.9vw,28px);line-height:1.25;letter-spacing:-0.01em;">What slip looks like</h2>
+        <p style="margin:0;font-size:17px;line-height:1.7;color:#34466E;text-wrap:pretty;">The posted window (posted end minus first observation) dominates: a one-day window ends on time 84% of the time, a two-day window 27%. Work type is the second feature. Recurring-schedule language in the description ("nightly", "Mon–Fri") carries almost no information once the window is controlled.</p>
+        <figure style="margin:8px 0 0;display:flex;flex-direction:column;gap:9px;">
+          <img src="uploads/02_slip_structure.png" alt="Structure of end-date slip across 5,429 validated NC work-zone records" style="width:100%;height:auto;display:block;border:2px solid #061541;background:#FFFFFF;">
+          <figcaption style="font-size:13.5px;line-height:1.5;color:#6B7A9C;">Structure of end-date slip (5,429 validated NC work-zone records).</figcaption>
+        </figure>
+      </section>
+
+      <section style="display:flex;flex-direction:column;gap:16px;">
+        <h2 style="margin:0;font-family:'Inter',sans-serif;font-weight:700;font-size:clamp(22px,1.9vw,28px);line-height:1.25;letter-spacing:-0.01em;">Do LLMs read more than a nearest neighbor?</h2>
+        <p style="margin:0;font-size:17px;line-height:1.7;color:#34466E;text-wrap:pretty;">On the hard stratum (window > 1 day, non-incident), a retrieval-augmented LLM is given the eight nearest historical records with their realized slips. The small model narrows its intervals without becoming more accurate; the large model tracks the neighbor median at every slip level.</p>
+        <figure style="margin:8px 0 0;display:flex;flex-direction:column;gap:9px;">
+          <img src="uploads/03_llm_vs_knn.png" alt="LLM vs kNN point-estimate error on 217 paired items" style="width:100%;height:auto;display:block;border:2px solid #061541;background:#FFFFFF;">
+          <figcaption style="font-size:13.5px;line-height:1.5;color:#6B7A9C;">Point-estimate error and median error by true slip, kNN vs Haiku 4.5 vs Sonnet 4.6.</figcaption>
+        </figure>
+      </section>
+
+      <section style="display:flex;flex-direction:column;gap:16px;">
+        <h2 style="margin:0;font-family:'Inter',sans-serif;font-weight:700;font-size:clamp(22px,1.9vw,28px);line-height:1.25;letter-spacing:-0.01em;">A conformal alert gate</h2>
+        <p style="margin:0;font-size:17px;line-height:1.7;color:#34466E;text-wrap:pretty;">Recasting the task as "alert if predicted slip > τ days," the threshold is set on calibration records that did not slip so that P(alert | no slip) ≤ α. The realized false-alarm rate matches α out of sample. kNN-derived scores dominate reference-class and raw-window scores at every α; an uncalibrated rule recalls more but with a 44% false-alarm rate.</p>
+        <figure style="margin:8px 0 0;display:flex;flex-direction:column;gap:9px;">
+          <img src="uploads/04_conformal_gate.png" alt="Conformal alert gate: recall at a guaranteed false-alarm rate" style="width:100%;height:auto;display:block;border:2px solid #061541;background:#FFFFFF;">
+          <figcaption style="font-size:13.5px;line-height:1.5;color:#6B7A9C;">The guarantee holds on real DOT data; recall is capped near 30%.</figcaption>
+        </figure>
+        <p style="margin:0;font-size:17px;line-height:1.7;color:#34466E;text-wrap:pretty;">About 250 historical on-time records are enough to stabilize the gate. The LLM's own confidence cannot serve as a score: it takes only a few discrete values and plateaus at 17% recall.</p>
+        <figure style="margin:8px 0 0;display:flex;flex-direction:column;gap:9px;">
+          <img src="uploads/05_calibration_and_confidence.png" alt="Calibration set size and LLM confidence" style="width:100%;height:auto;display:block;border:2px solid #061541;background:#FFFFFF;">
+          <figcaption style="font-size:13.5px;line-height:1.5;color:#6B7A9C;">What the gate needs, and what it cannot use.</figcaption>
+        </figure>
+      </section>
+
+      <section style="display:flex;flex-direction:column;gap:16px;">
+        <h2 style="margin:0;font-family:'Inter',sans-serif;font-weight:700;font-size:clamp(22px,1.9vw,28px);line-height:1.25;letter-spacing:-0.01em;">Reproduce</h2>
+        <pre style="margin:0;padding:18px 20px;background:#061541;color:#FAF8F0;font-family:'SF Mono',Menlo,Consolas,monospace;font-size:13px;line-height:1.6;overflow-x:auto;overflow-y:hidden;white-space:pre;">python bench/mark_censored.py                       # label validation
+python bench/group_stats.py                         # slip structure
+1..10 | % { python bench/runner.py --template knn   --stratify --no-noslip --seed $_ }
+1..10 | % { python bench/runner.py --template warm3 --stratify --no-noslip --model claude-sonnet-4-6 --seed $_ }
+python bench/compare_runs.py --a "out/pilot_claude-sonnet-4-6_*_seed*.parquet" --b "out/pilot_nomodel_knn30_*_seed*.parquet"
+python bench/conformal.py --source pool --tau 7 --alpha 0.1
+python make_figures.py                              # regenerate the figures above</pre>
+        <p style="margin:0;font-size:14px;line-height:1.6;color:#6B7A9C;text-wrap:pretty;">Experimental code, prompt templates and an initial manuscript draft were developed with the assistance of an AI model (Claude). All data processing, experiment execution, design decisions and verification were performed by the authors.</p>
+      </section>
+    </main>
+
+    <footer style="margin-top:56px;padding-top:18px;border-top:1px solid #A8B3CB;">
+      <a href="ProjectDetail.dc.html?project=transportation" style="display:inline-flex;align-items:center;gap:10px;color:#061541;font-size:15px;font-weight:600;"><span style="font-size:1.2em;line-height:1;">←</span> Back to Transportation</a>
+    </footer>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

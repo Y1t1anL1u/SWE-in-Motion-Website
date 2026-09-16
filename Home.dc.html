@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:wght@500;700&family=JetBrains+Mono:wght@500;700&family=Chakra+Petch:wght@600;700&family=Space+Mono:wght@400;700&family=Sometype+Mono:wght@400;500;700&family=Inter:wght@400;700&family=Source+Serif+4:wght@400&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#0d0f1a;}
+a{color:#061541;text-decoration:none;}
+a:hover{color:#061541;text-decoration:underline;}
+@keyframes bgfade{from{opacity:0}to{opacity:1}}
+</style>
+</helmet>
+<div data-screen-label="Home" style="position:relative;width:100%;min-height:100vh;aspect-ratio:16/9;overflow:hidden;color:#061541;background:#dfe9f2;">
+  <sc-if value="{{ bgReady }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background-image:url({{ bgSrc }});background-size:cover;background-position:right bottom;image-rendering:pixelated;animation:bgfade 900ms ease-out;"></div></sc-if>
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 78% 110% at 0% 0%, {{ washColor }} 0%, {{ washColor }} 42%, transparent 100%);pointer-events:none;"></div>
+
+  <nav style="position:absolute;top:clamp(20px,3.2vw,44px);left:clamp(24px,4.3vw,72px);display:flex;gap:clamp(24px,3.3vw,56px);font-family:'Inter',sans-serif;font-weight:700;font-size:clamp(13px,0.95vw,15px);letter-spacing:0.02em;">
+    <a href="#" style="color:{{ ink }};border-bottom:3px solid {{ ink }};padding-bottom:3px;">About</a>
+    <a href="Projects.dc.html" style="color:{{ ink }};opacity:0.85;padding-bottom:3px;border-bottom:3px solid transparent;" style-hover="opacity:1;border-bottom:3px solid {{ ink }};">Projects</a>
+    <a href="Resume.dc.html" style="color:{{ ink }};opacity:0.85;padding-bottom:3px;border-bottom:3px solid transparent;" style-hover="opacity:1;border-bottom:3px solid {{ ink }};">Resume</a>
+    <a href="Advisor.dc.html" style="color:{{ ink }};opacity:0.85;padding-bottom:3px;border-bottom:3px solid transparent;" style-hover="opacity:1;border-bottom:3px solid {{ ink }};">Advisor</a>
+  </nav>
+
+
+  <button type="button" onClick="{{ cycleScene }}" aria-label="Switch season" title="Switch season" style="position:absolute;top:calc(clamp(20px,3.2vw,44px) + 0.5em - 16px);right:clamp(24px,4.3vw,72px);width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;border-radius:50%;background:{{ chipBg }};color:{{ ink }};opacity:0.55;font-size:16px;line-height:1;cursor:pointer;padding:0;font-family:inherit;transition:opacity 150ms;" style-hover="opacity:1;">{{ sceneGlyph }}</button>
+
+  <div style="position:absolute;left:clamp(24px,4.3vw,72px);top:clamp(72px,11vw,190px);max-width:clamp(340px,40vw,640px);display:flex;flex-direction:column;gap:clamp(8px,0.9vw,16px);">
+    <h1 style="margin:0;font-family:'Pixelify Sans',monospace;font-weight:700;font-size:clamp(48px,6.4vw,112px);line-height:0.92;letter-spacing:-0.01em;color:{{ ink }};white-space:nowrap;">Hi, I’m<br>Yitian.</h1>
+    <div style="font-family:'Inter',sans-serif;font-weight:700;font-size:clamp(18px,1.6vw,28px);line-height:1.15;color:{{ ink }};">Software engineer in motion</div>
+    <p style="margin:clamp(-6px,-0.6vw,-3px) 0 0;font-family:'Inter',sans-serif;font-weight:500;font-size:clamp(15px,1.15vw,20px);line-height:1.4;color:{{ ink }};max-width:28ch;text-wrap:pretty;">There is always a next move.</p>
+    <div style="display:flex;gap:14px;align-items:center;">
+      <a href="https://www.linkedin.com/in/yitian-alex-liu" target="_blank" rel="noopener" aria-label="LinkedIn" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border:3px solid {{ ink }};background:{{ btnBg }};color:{{ ink }};text-decoration:none;" style-hover="opacity:0.85;text-decoration:none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+      <a href="https://github.com/AlexxxLiu" target="_blank" rel="noopener" aria-label="GitHub" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border:3px solid {{ ink }};background:{{ btnBg }};color:{{ ink }};text-decoration:none;" style-hover="opacity:0.85;text-decoration:none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/></svg></a>
+      <a href="mailto:alexxxliu617@gmail.com" aria-label="Email" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border:3px solid {{ ink }};background:{{ btnBg }};color:{{ ink }};text-decoration:none;" style-hover="opacity:0.85;text-decoration:none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="0"/><path d="M2.5 6l9.5 7 9.5-7"/></svg></a>
+    </div>
+    <div style="display:flex;gap:clamp(12px,1.3vw,22px);flex-wrap:wrap;margin-top:clamp(2px,0.4vw,8px);">
+      <a href="#" style="display:inline-flex;align-items:center;gap:10px;background:#f5d020;color:#061541;border:3px solid #061541;padding:clamp(10px,0.9vw,15px) clamp(16px,1.4vw,24px);font-family:'Inter',sans-serif;font-weight:700;font-size:clamp(14px,1.1vw,18px);text-decoration:none;" style-hover="opacity:0.85;text-decoration:none;" >Roll the dice <span style="font-size:1.2em;line-height:1;">→</span></a>
+      <a href="Projects.dc.html" style="display:inline-flex;align-items:center;background:{{ btnBg }};color:{{ ink }};border:3px solid {{ ink }};padding:clamp(10px,0.9vw,15px) clamp(16px,1.4vw,24px);font-family:'Inter',sans-serif;font-weight:700;font-size:clamp(14px,1.1vw,18px);text-decoration:none;" style-hover="opacity:0.85;text-decoration:none;" >View projects</a>
+    </div>
+  </div>
+
+  <div style="position:absolute;left:31%;bottom:1%;display:flex;flex-direction:column;align-items:center;z-index:2;">
+    <div style="position:absolute;left:50%;bottom:52%;transform:translateX(-50%);z-index:1;font-family:'Inter',sans-serif;font-weight:700;font-size:clamp(13px,1vw,16px);color:{{ ink }};opacity:{{ hintOpacity }};transition:opacity 200ms;text-align:center;pointer-events:none;letter-spacing:0.01em;white-space:nowrap;text-shadow:0 0 6px {{ washColor }}, 0 0 12px {{ washColor }};">Roll into my life</div>
+    <div onMouseEnter="{{ diceEnter }}" onMouseLeave="{{ diceLeave }}" onClick="{{ rollDice }}" style="width:clamp(140px,12vw,200px);height:clamp(230px,20vw,340px);cursor:pointer;">
+      <x-import component-from-global-scope="dice-3d" from="./dice3d.js" src="uploads/dice-01.glb" style="display:block;width:100%;height:100%;" hint-size="100%,100%"></x-import>
+    </div>
+  </div>
+
+  <sc-if value="{{ showCard }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeCard }}" style="position:fixed;inset:0;z-index:50;background:rgba(6,21,65,0.38);display:flex;align-items:center;justify-content:center;padding:24px;">
+      <div onClick="{{ stop }}" style="width:min(720px,100%);background:#061541;padding:2px;filter:drop-shadow(0 20px 40px rgba(6,21,65,0.35));clip-path:polygon(6px 0,calc(100% - 6px) 0,calc(100% - 6px) 3px,calc(100% - 3px) 3px,calc(100% - 3px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 3px) calc(100% - 6px),calc(100% - 3px) calc(100% - 3px),calc(100% - 6px) calc(100% - 3px),calc(100% - 6px) 100%,6px 100%,6px calc(100% - 3px),3px calc(100% - 3px),3px calc(100% - 6px),0 calc(100% - 6px),0 6px,3px 6px,3px 3px,6px 3px);">
+        <div style="background:#FBF7ED;padding:16px 20px 18px;display:flex;flex-direction:column;gap:16px;color:#061541;position:relative;clip-path:polygon(6px 0,calc(100% - 6px) 0,calc(100% - 6px) 3px,calc(100% - 3px) 3px,calc(100% - 3px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 3px) calc(100% - 6px),calc(100% - 3px) calc(100% - 3px),calc(100% - 6px) calc(100% - 3px),calc(100% - 6px) 100%,6px 100%,6px calc(100% - 3px),3px calc(100% - 3px),3px calc(100% - 6px),0 calc(100% - 6px),0 6px,3px 6px,3px 3px,6px 3px);">
+          <div style="display:flex;align-items:center;justify-content:center;gap:12px;font-family:'Inter',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.22em;text-transform:uppercase;">
+            <span style="color:#F0B400;font-size:18px;line-height:1;">✦</span> Moment unlocked
+          </div>
+          <button type="button" onClick="{{ closeCard }}" aria-label="Close" style="position:absolute;top:10px;right:12px;width:32px;height:32px;border:none;background:transparent;color:#061541;font-size:24px;line-height:1;cursor:pointer;font-family:'Inter',sans-serif;font-weight:700;">×</button>
+          <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start;">
+            <div style="border:2px solid #061541;background:#FFFDF8;padding:6px 6px 4px;display:flex;flex-direction:column;gap:6px;">
+              <div role="img" aria-label="{{ moment.caption }}" style="width:100%;aspect-ratio:1.15/1;background-image:url({{ moment.img }});background-size:cover;background-position:{{ moment.imgPos }};image-rendering:pixelated;"></div>
+              <div style="text-align:center;font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;">{{ moment.caption }}</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;padding-top:2px;min-width:0;">
+              <span style="align-self:flex-start;background:#DCEBFF;color:#1D4ED8;padding:4px 10px;font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;">{{ moment.tag }}</span>
+              <h2 style="margin:0;font-family:'Pixelify Sans',monospace;font-weight:700;font-size:clamp(30px,2.8vw,44px);line-height:0.95;text-wrap:balance;overflow-wrap:anywhere;">{{ moment.title }}</h2>
+              <div style="display:flex;flex-direction:column;gap:10px;font-family:'Source Serif 4',Georgia,serif;font-size:clamp(15px,1.05vw,17px);line-height:1.45;">
+                <sc-for list="{{ moment.paragraphs }}" as="p" hint-placeholder-count="2"><p style="margin:0;text-wrap:pretty;">{{ p }}</p></sc-for>
+              </div>
+            </div>
+          </div>
+          <div style="border-top:2px solid #061541;padding-top:16px;display:flex;justify-content:center;">
+            <button type="button" onClick="{{ keepRolling }}" style="display:inline-flex;align-items:center;gap:12px;background:#FFDC45;color:#061541;border:3px solid #061541;box-shadow:inset 0 2px 0 #FFF0A3, inset 0 -3px 0 #E0B81F;padding:9px 26px;font-family:'Inter',sans-serif;font-weight:700;font-size:16px;cursor:pointer;" style-hover="filter:brightness(1.04);">Keep rolling <img src="uploads/logo-dice.png" alt="" style="width:24px;height:24px;image-rendering:pixelated;"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <div style="position:absolute;left:clamp(24px,4.3vw,72px);bottom:clamp(16px,2vw,32px);font-family:{{ fontUi }};font-weight:700;font-size:clamp(9px,0.7vw,12px);color:{{ ink }};opacity:0.8;text-transform:uppercase;letter-spacing:0.05em;">{{ sceneLabel }}</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;scene&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;'auto'|'spring'|'summer'|'autumn'|'winter'|'night'&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;spring&quot;,&quot;summer&quot;,&quot;autumn&quot;,&quot;winter&quot;,&quot;night&quot;],&quot;section&quot;:&quot;Scene&quot;},&quot;typeSet&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;A&quot;,&quot;tsType&quot;:&quot;'A'|'B'|'C'&quot;,&quot;options&quot;:[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;],&quot;section&quot;:&quot;Typography&quot;}}">
+class Component extends DCLogic {
+  state = { ready: false, hover: false, showCard: false, rolling: false, moment: -1, moments: [] };
+  async componentDidMount() {
+    this.setState({ ready: true });
+    const mod = await import('./momentsData.js');
+    this.setState({ moments: mod.moments });
+  }
+  diceEnter = () => this.setState({ hover: true });
+  diceLeave = () => this.setState({ hover: false });
+  rollDice = async () => {
+    if (this.state.rolling) return;
+    this.setState({ rolling: true, showCard: false });
+    const el = document.querySelector('dice-3d');
+    if (el && el.roll) await el.roll();
+    const n = this.state.moments.length;
+    let next = Math.floor(Math.random() * n);
+    if (n > 1 && next === this.state.moment) next = (next + 1) % n;
+    this.setState({ rolling: false, showCard: true, moment: next });
+  };
+  closeCard = () => this.setState({ showCard: false });
+  keepRolling = () => { this.setState({ showCard: false }); setTimeout(this.rollDice, 120); };
+  stop = (e) => e.stopPropagation();
+  scenes = ['spring', 'summer', 'autumn', 'winter', 'night'];
+  cycleScene = () => {
+    const cur = this.scene();
+    const next = this.scenes[(this.scenes.indexOf(cur) + 1) % this.scenes.length];
+    this.setState({ override: next });
+  };
+  scene() {
+    if (this.state.override) return this.state.override;
+    const forced = this.props.scene ?? 'auto';
+    if (forced !== 'auto') return forced;
+    const d = new Date(), h = d.getHours(), m = d.getMonth();
+    if (h < 6 || h >= 18) return 'night';
+    if (m >= 2 && m <= 4) return 'spring';
+    if (m >= 5 && m <= 7) return 'summer';
+    if (m >= 8 && m <= 10) return 'autumn';
+    return 'winter';
+  }
+  typeSet() {
+    const t = this.props.typeSet ?? 'E';
+    return { A: { fontUi: "'IBM Plex Mono', monospace", fontBody: "'Space Grotesk', sans-serif" },
+      B: { fontUi: "'Space Mono', monospace", fontBody: "'Sometype Mono', monospace" },
+      E: { fontUi: "'Inter', sans-serif", fontBody: "'Inter', sans-serif" },
+      D: { fontUi: "'JetBrains Mono', monospace", fontBody: "'DM Sans', sans-serif" },
+      C: { fontUi: "'Chakra Petch', sans-serif", fontBody: "'Chakra Petch', sans-serif" } }[t];
+  }
+  renderVals() {
+    const s = this.scene();
+    const dark = s === 'night';
+    const wash = { spring: 'rgba(238,246,252,0.92)', summer: 'rgba(232,244,252,0.92)', autumn: 'rgba(253,242,226,0.92)', winter: 'rgba(238,243,250,0.94)', night: 'rgba(14,14,42,0.82)' }[s];
+    const labels = { spring: 'Spring · Pittsburgh, PA', summer: 'Summer · Pittsburgh, PA', autumn: 'Autumn · Pittsburgh, PA', winter: 'Winter · Pittsburgh, PA', night: 'Night · Pittsburgh, PA' };
+    return {
+      bgReady: this.state.ready,
+      bgSrc: 'uploads/home-pittsburgh-' + s + '-board-2048.webp',
+      washColor: wash,
+      ink: dark ? '#f4f1e6' : '#061541',
+      btnBg: dark ? 'rgba(20,20,50,0.6)' : 'rgba(255,255,255,0.85)',
+      sceneLabel: labels[s],
+      cycleScene: this.cycleScene,
+      diceEnter: this.diceEnter, diceLeave: this.diceLeave, rollDice: this.rollDice, closeCard: this.closeCard, keepRolling: this.keepRolling, stop: this.stop,
+      hintOpacity: this.state.hover && !this.state.rolling && !this.state.showCard ? 1 : 0,
+      showCard: this.state.showCard && this.state.moment >= 0,
+      moment: this.state.moments[this.state.moment] ?? this.state.moments[0] ?? { paragraphs: [] },
+      chipBg: dark ? 'rgba(255,255,255,0.14)' : 'rgba(6,21,65,0.08)',
+      sceneGlyph: { spring: '❀', summer: '☀', autumn: '❦', winter: '❄', night: '☾' }[s],
+      ...this.typeSet(),
+    };
+  }
+}
+</script>
+</body>
+</html>
