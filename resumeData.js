@@ -8,28 +8,29 @@ export const resume = {
       { title: 'University of Colorado', sub: 'B.S. in Economics and Minor in Mathematics', dates: '09/2016 – 05/2020' },
     ]},
     { title: 'Experience', kind: 'entries', items: [
-      { title: 'Research Assistant', sub: 'Georgia Institute of Technology', dates: '05/2026 – Present', bullets: [
-        'Profiled PyTorch/GPU pipelines and wrote fused CUDA kernels for a Transformer-based vision-language-action (VLA) policy, cutting onboard inference latency 1.5× on edge hardware',
-        'Built a real-time C++ safety layer on Linux bounding model actions by workspace and velocity limits, with shared-memory IPC and a deterministic fail-safe stop path',
-        'Built a Python simulation harness to test fault cases like sensor dropout and stale messages, tracking success and safety-violation rates as weekly regression metrics',
+      { title: 'Software Engineer II', sub: 'Pennsylvania Department of Transportation (Turnpike)', dates: '01/2025 – Present', bullets: [
+        'Traffic Operations Copilot — Built an LLM agent using tool calling on real-time traffic and weather APIs and RAG on historical work orders via pgvector to forecast incident risk and autonomously draft dispatch recommendations',
+        'Transaction Auditing & Reconciliation Platform — Engineered Pennsylvania Turnpike\'s core billing infrastructure in Java/Spring Boot across 560+ highway miles, automating vehicle verification, transaction generation, and payment processing',
+        'Optimized DMV lookup with Elasticsearch fuzzy matching and Redis caching, reducing latency from 400ms to 50ms and improving plate match accuracy by 3%',
+        'Designed a distributed stream processing pipeline with Kafka and Flink, detecting payment mismatches via interval-join for automated financial auditing across $18M+/month in revenue',
       ]},
-      { title: 'Software Engineer', sub: 'Pennsylvania Turnpike Commission', dates: '06/2023 – 12/2024', bullets: [
-        'Engineered real-time C++/Linux roadside systems across 500+ highway miles, fusing heterogeneous sensor inputs and processing 500K+ daily transactions',
-        'Built Python/SQL analysis and dashboards tracking failure and exception rates fleet-wide across 2M+ monthly transactions, isolating root causes behind 13% revenue leakage',
-        'Designed an automated escalation path routing low-confidence perception outputs to human operator review queues via Azure Service Bus, improving approval rate by 12%',
-        'Shipped an end-to-end license plate recognition pipeline on Linux edge nodes, with a Python/FastAPI service ingesting 67K+/day camera images in Dockerized microservices',
-        'Profiled and optimized the DMV lookup pipeline from 400ms to ~50ms via Elasticsearch fuzzy matching and Redis caching, improving plate accuracy by 3%',
+      { title: 'Software Engineer I', sub: 'Pennsylvania Department of Transportation (Turnpike)', dates: '06/2023 – 12/2024', bullets: [
+        'Implemented an end-to-end ML infrastructure pipeline for license plate recognition using computer vision algorithms on Linux, addressing a 13% unpaid toll rate across 2M+/month transactions',
+        'Built a Python/FastAPI data pipeline processing 67k+/day camera images, routing below-threshold results via Azure Service Bus to reviewer queues based on experience level',
+        'Built a full-stack human-in-the-loop annotation platform in React/TypeScript, dockerized and deployed to Azure via DevOps CI/CD, enabling 25k+ image labels per day',
       ]},
-      { title: 'Software Engineer Intern', sub: 'SAP', dates: '07/2020 – 12/2020', bullets: [
+      { title: 'Software Engineer (Intern to Full-time)', sub: 'SAP', dates: '07/2019 – 12/2020', bullets: [
         'Expanded automated test coverage with JUnit and Mockito unit and integration suites, raising line coverage from 50% to 80% across 22 Onboarding components',
-        'Validated migrated OData endpoints in Java against legacy API behavior, verifying response schema and data parity across job requisition flows before cutover',
+        'Refactored state management of SuccessFactors Onboarding module using React and JavaScript with form pre-population and field mapping, eliminating manual data re-entry',
       ]},
     ]},
     { title: 'Skills', kind: 'skills', items: [
       { label: 'Languages', value: 'Java, Python, Go, C++, JavaScript, TypeScript, HTML, CSS' },
+      { label: 'Backend', value: 'Spring Boot, Django REST Framework, Node.js, Kafka, Flink, Azure Service Bus, Celery, gRPC' },
+      { label: 'Frontend', value: 'Angular, React, Vue, Next.js, Tailwind CSS' },
       { label: 'Databases', value: 'PostgreSQL, MySQL, Microsoft SQL Server, MongoDB, Redis, Elasticsearch' },
       { label: 'Cloud & DevOps', value: 'Azure, AWS (ECS, RDS, S3), Docker, Kubernetes, Terraform' },
-      { label: 'AI/ML', value: 'LLM API Integration, ML Infrastructure, Computer Vision, LangChain, MCP' },
+      { label: 'AI/ML', value: 'LLM API Integration, ML Infrastructure, Computer Vision, LangChain, Prompt Engineering, MCP' },
     ]},
     { title: 'Open Source Contributions', kind: 'entries', items: [
       { title: '52°North', text: 'Contributed to open source geospatial software and spatial data infrastructure projects.', link: { label: 'View on GitHub', href: 'https://github.com/52north' } },
