@@ -47,6 +47,18 @@ a:hover{color:#004CE5;text-decoration:underline;}
                     <sc-for list="{{ e.bullets }}" as="b" hint-placeholder-count="2"><li>{{ b }}</li></sc-for>
                   </ul>
                 </sc-if>
+                <sc-if value="{{ e.hasGroups }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;gap:14px;margin-top:8px;">
+                    <sc-for list="{{ e.groups }}" as="g" hint-placeholder-count="2">
+                      <div style="display:flex;flex-direction:column;gap:4px;">
+                        <div style="font-size:18px;font-weight:700;line-height:1.4;color:#061541;">{{ g.heading }}</div>
+                        <ul style="margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px;font-size:18px;line-height:1.5;color:#34466E;">
+                          <sc-for list="{{ g.bullets }}" as="b" hint-placeholder-count="2"><li>{{ b }}</li></sc-for>
+                        </ul>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
                 <sc-if value="{{ e.hasText }}" hint-placeholder-val="{{ false }}"><p style="margin:8px 0 0;font-size:18px;line-height:1.5;color:#34466E;">{{ e.text }}</p></sc-if>
                 <sc-if value="{{ e.hasLink }}" hint-placeholder-val="{{ false }}"><a href="{{ e.link.href }}" target="_blank" style="align-self:flex-start;margin-top:8px;font-size:18px;font-weight:600;color:#004CE5;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px;">{{ e.link.label }} ↗</a></sc-if>
               </div>
@@ -85,7 +97,7 @@ class Component extends DCLogic {
       ...s,
       isEntries: s.kind === 'entries',
       isSkills: s.kind === 'skills',
-      items: s.kind === 'entries' ? s.items.map((e) => ({ ...e, hasDates: !!e.dates, hasSub: !!e.sub, hasBullets: !!(e.bullets && e.bullets.length), hasText: !!e.text, hasLink: !!e.link })) : s.items,
+      items: s.kind === 'entries' ? s.items.map((e) => ({ ...e, hasDates: !!e.dates, hasSub: !!e.sub, hasBullets: !!(e.bullets && e.bullets.length), hasGroups: !!(e.groups && e.groups.length), hasText: !!e.text, hasLink: !!e.link })) : s.items,
     }));
     return { resume: { ...r, sections } };
   }
